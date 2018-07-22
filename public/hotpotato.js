@@ -20,7 +20,7 @@ $('#search').on('click', function(e) {
       let button = '';
       if (!movie.in_library && !movie.in_wanted) {
         button = `
-          <button class="btn btn-warning" type="button" onClick="addMovie('${movie.imdb}','${movie.original_title}')">
+          <button class="btn btn-warning" type="button" onClick="addMovie('${movie.imdb}','${escape(movie.original_title)}')">
             Add to Queue
           </button>
         `;
@@ -49,11 +49,11 @@ function addMovie(imdb, title) {
     console.log('movie.add', data);
     if (data.success) {
       $(`#notification-${imdb}`).replaceWith(`
-        <div class="alert alert-success" role="alert">${title} added to queue</div>
+        <div class="alert alert-success" role="alert">${unescape(title)} added to queue</div>
       `);
     } else {
       $(`#notification-${imdb}`).replaceWith(`
-        <div class="alert alert-danger" role="alert">Failed to add ${title} to queue</div>
+        <div class="alert alert-danger" role="alert">Failed to add ${unescape(title)} to queue</div>
       `);
     }
   });
