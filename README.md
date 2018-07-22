@@ -24,3 +24,20 @@ APIKEY=123 node index.js
 
 http://localhost:3000/hotpotato
 
+### Example systemd unit file
+
+```
+[Unit]
+Description=Hot Potato
+After=network.target
+
+[Service]
+Environment=APIKEY=123
+Type=simple
+User=ubuntu
+ExecStart=/usr/bin/node /home/ubuntu/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
