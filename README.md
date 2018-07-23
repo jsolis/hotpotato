@@ -35,6 +35,7 @@ After=network.target
 Environment=APIKEY=123
 Type=simple
 User=ubuntu
+WorkingDirectory=/home/ubuntu
 ExecStart=/usr/bin/node /home/ubuntu/index.js
 Restart=on-failure
 
