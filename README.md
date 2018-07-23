@@ -22,7 +22,7 @@ APIKEY=123 node index.js
 
 ### URL
 
-http://localhost:3000/hotpotato
+http://localhost:3000/
 
 ### Example systemd unit file
 

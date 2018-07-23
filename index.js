@@ -5,11 +5,8 @@ const app = express();
 
 const APIKEY = process.env.APIKEY || 'd56eb7c75a83462fbca2f34ff385f30f';
 
+app.use('/', express.static('public'));
 app.use('/hotpotato', express.static('public'));
-
-app.get('/', (req, res) => {
-  res.send('hot potato is baking');
-});
 
 app.get('/hotpotato/search/:searchTerm', (req, res) => {
   const { searchTerm } = req.params;
