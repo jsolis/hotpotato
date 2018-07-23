@@ -1,3 +1,4 @@
+const async = require('async');
 const express = require('express');
 const request = require('request');
 
@@ -11,7 +12,24 @@ app.use('/hotpotato', express.static('public'));
 app.get('/hotpotato/search/:searchTerm', (req, res) => {
   const { searchTerm } = req.params;
   request(`http://localhost:5050/api/${APIKEY}/search/?q=${searchTerm}`, (error, resp, body) => {
-    res.json(JSON.parse(body));
+    const searchResults = JSON.parse(body);
+    async.each(searchResults.movies, (movie, callback) => {
+      const imdb = movie.imdb;
+      request(`http://www.omdbapi.com/?i=${imdb}&apikey=88fde882`, (error, resp, body) => {
+        const movieInfo = JSON.parse(body);
+        movie.rated = movieInfo.Rated;
+        movie.runtime = movieInfo.Runtime;
+        movie.imdbRating = movieInfo.imdbRating;
+        movie.awards = movieInfo.Awards;
+        callback();
+      });
+    }, (err) => {
+      if (err) {
+        res.json({error: true, reason: err});
+      } else {
+        res.json(searchResults);
+      }
+    });
   });
 });
 

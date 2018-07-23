@@ -31,8 +31,12 @@ $('#search').on('click', function(e) {
           <img class="mr-3" src="${movie.images.poster[0]}" xclass="img-fluid" alt="${movie.original_title}">
           <div class="media-body pt-2">
             <h5 class="mt-0 mb-1">${movie.original_title} (${movie.year})</h5>
+            <p><b>Rated: ${movie.rated}</b></p>
+            <p>Run Time: ${movie.runtime}</p>
+            <p>IMDB Rating: ${movie.imdbRating}</p>
+            <p>Awards: ${movie.awards}</p>
             <p style="color: green"><b>${status}</b></p>
-            <p><b>${genres}</b></p>
+            <p>${genres}</p>
             <p>${movie.plot}</p>
             <p><a href="https://www.imdb.com/title/${movie.imdb}/">IMDB</a></p>
             <p>${button}</p>
